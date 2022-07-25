@@ -1,0 +1,58 @@
+import java.util.*;
+public class PairSum {
+
+	class Node{
+		int data;
+		Node left = null;
+		Node right = null;
+		Node (int data){
+			this.data = data;
+		}
+	}
+	public static boolean searchPair(Node root, int Target, Set<Integer> set) {
+		if (root == null) {
+			return false;
+		}
+		if(searchPair(root.left, Target, set)){
+			return true;
+		}
+		if (set.contains(Target - root.data))
+        {
+            System.out.println("Pair found (" + (Target - root.data) + ", "
+                                    + root.data + ")");
+            return true;
+        }
+		else {
+            set.add(root.data);
+        }
+ 
+        return searchPair(root.right, Target, set);
+    }
+	public static Node insert(Node root, int key) {
+		if (root == null) {
+			return Node(key);
+		}
+		else if (key<root.data) {
+			root.left=insert(root.left, key);
+		}
+		else {
+			root.right = insert(root.left, key);
+		}
+		return root;
+	}
+	private static PairSum.Node Node(int key) {
+		
+		return null;
+	}
+	public static void main(String[] args) {
+		int [] arr = {40,20,10,30,60,50,70};
+		Node root = null;
+		for (int array:arr) {
+			root = insert(root, array);
+		}
+		int Target = 120;
+		Set<Integer> set = new HashSet<>();
+
+	}
+
+}
